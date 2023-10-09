@@ -1,0 +1,62 @@
+
+.friends-button{
+    background-color: transparent;
+    border: 0.5px solid #e4e4e4;
+    margin-bottom: 5px ;
+    width: 80%;
+}
+
+
+
+body{margin-top:20px;
+    background:#eee;
+}
+
+.padding-10{
+    padding:10px !important;    
+}
+
+
+
+/** Bullet List
+ *************************************************** **/
+ul.bullet-list li {
+    position: relative;
+	padding: 0 0 0 20px;
+	margin: 0 0 10px;
+}
+ul.bullet-list li:before {
+	border: 6px solid #cccccc;
+	border-radius: 100px;
+	content: '';
+	display: inline-block;
+	left: 0;
+	margin: 0;
+	position: absolute;
+	top: 5px;
+	z-index: 2;
+}
+ul.bullet-list li.red:before {
+	border-color: #d64b4b;
+}
+ul.bullet-list li.green:before {
+	border-color: #4dd79c;
+}
+ul.bullet-list li.blue:before {
+	border-color: #0090d9;
+}
+ul.bullet-list li.orange:before {
+	border-color: #E2A917;
+}
+ul.bullet-list li h3 {
+	display: block;
+	font-weight: 700;
+	font-size: 14px;
+	font-size: 1.4rem;
+	line-height: 1.4;
+	color: #171717;
+	margin:0; padding:0;
+}
+
+/* ########################### */
+/* Chat */
