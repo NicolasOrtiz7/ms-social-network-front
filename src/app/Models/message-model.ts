@@ -1,12 +1,18 @@
+import { User } from "./user";
+
 export class MessageModel {
 
-    messageId!:number;
+    messageId : number;
 
-    senderUserId!: number;
+    senderUserId : number;
 
-    content!: string;
+    senderUser : User;
 
-    datetime! : Date;
+    content : string;
 
-    chatId!: number;
+    datetime : Date;
+
+    chatId : number;
+    
+    datetimeFormatted: string | null;
 }

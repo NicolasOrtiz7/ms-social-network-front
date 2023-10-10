@@ -6,6 +6,18 @@
     width: 80%;
 }
 
+.chat-button{
+	position: fixed; 
+	bottom: 5px; 
+	right: 450px;
+}
+
+.chat-body{
+	position: relative;
+	height: 400px; 
+	overflow: auto;
+}
+
 
 
 body{margin-top:20px;

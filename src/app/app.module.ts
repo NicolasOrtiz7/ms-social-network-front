@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './Components/post/post.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { DatePipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
 
 
 
@@ -30,7 +32,10 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    DatePipe, 
+    { provide: LOCALE_ID, useValue: 'es-ES' }, // Establece la configuración regional en español
+ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

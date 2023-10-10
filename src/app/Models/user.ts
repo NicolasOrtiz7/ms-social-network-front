@@ -1,17 +1,17 @@
 export class User {
 
-    id!: number;
+    id: number;
 
-    name!: string;
+    name: string;
 
-    username!: string;
+    username: string;
 
-    email!: string;
+    email: string;
 
-    description!: string;
+    description: string;
 
-    profilePicture!: string;
+    profilePicture: string;
 
-    coverPicture!: string;
+    coverPicture: string;
 
 }
