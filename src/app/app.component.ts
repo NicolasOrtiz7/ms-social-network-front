@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'social-network-front';
+
+  public getUserIdFromLocalStorage(): number{
+    const idLocal = localStorage.getItem("id");
+    if (idLocal != null) return parseInt(idLocal); 
+    else return -1;
+  }
+
 }

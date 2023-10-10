@@ -51,7 +51,7 @@
 
 <!-- Botón para abrir el chat -->
 <div class="dropup-center dropup chat-button" >
-  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+  <button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
     Nombre Apellido
   </button>
   <div class="dropdown-menu " style="width: 300px;">
@@ -64,9 +64,7 @@
           style="border-top: 4px solid #15a1ff;">
           <h5 class="mb-0">Chat messages</h5>
           <div class="d-flex flex-row align-items-center">
-            <i class="fas fa-minus me-3 text-muted fa-xs"></i>
-            <i class="fas fa-comments me-3 text-muted fa-xs"></i>
-            <i class="fas fa-times text-muted fa-xs"></i>
+            <button (click)="closeChat()" type="button" class="btn-close" aria-label="Close"></button>
           </div>
         </div>
       </div>
