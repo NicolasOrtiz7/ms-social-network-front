@@ -8,6 +8,8 @@ import * as SockJS from 'sockjs-client';
 import { Message } from '@stomp/stompjs';
 import { DatePipe } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
+import { UserService } from 'src/app/Services/user.service';
+import { Chat } from 'src/app/Models/chat';
 
 @Component({
   selector: 'app-chat',
@@ -16,43 +18,100 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class ChatComponent implements OnInit {
 
-  chatList: MessageModel[] = [];
+  chatList: MessageModel[] = [];       // Lista de mensajes
+  usersList: User[] = [];              // Lista de usuarios/amigos
 
-  myUserId: number; // esto lo cambiamos cuando se implementa la seguridad y el localStorage
-  chatId = 1; // esto lo cambiamos cuando obtenemos la lista de mensajes por usuario
+  myUserId: number;                   // esto lo cambiamos cuando se implementa la seguridad
+  currentChat: Chat = new Chat(-1);
 
   message: MessageModel = new MessageModel();
 
   constructor(
-    @Inject(LOCALE_ID) private locale: string, // poner idioma en español
-    private chatService: ChatService,
+    @Inject(LOCALE_ID) private locale: string, // poner idioma en español (fechas del chat)
     private datePipe: DatePipe,
-    private appComponent: AppComponent
-    ) {
+
+    private appComponent: AppComponent,
+
+    private chatService: ChatService,
+    private userService: UserService
+  ) {
 
     this.locale = 'es-ES'; // Establece la configuración regional en español
   }
 
   ngOnInit(): void {
-    this.myUserId = this.appComponent.getUserIdFromLocalStorage();
-    this.getChatById(this.chatId);
+    this.myUserId = this.appComponent.getUserIdFromLocalStorage(); // Obtiene el Id de mi usuario
+    this.getAllUsers() // Obtiene todos los usuarios registrados. Cambiar por getFriends()
 
-    setTimeout(() => { // este metodo ejecutarlo cuando se abre un nuevo chat
-      this.scrollToBottom();
-    }, 2000);
+  }
 
+  getAllUsers() {
+    this.userService.getAllUsers().subscribe(data => {
+      this.usersList = data;
+      console.log(data)
+    })
+  }
+
+  // Al presionar para abrir el chat con un amigo, verifica si ya están cargados los mensajes
+  verifyIfCurrentChatIsLoaded(receiverUser: number) {
+    this.message.content = "";
+    let a = this.currentChat.senderUserId;
+    let b = this.currentChat.receiverUserId;
+
+    if ((a === this.myUserId && b === receiverUser) || (b === this.myUserId && a === receiverUser)) console.log("Los mensajes ya están cargados.");
+    // si no están cargados, verifica si el chat existe y los carga
+    else this.getChatIfExists(receiverUser);
+
+  }
+
+  // Al presionar para abrir el chat con un amigo, verifica si existe un chat y carga los mensajes
+  getChatIfExists(receiverUser: number) {
+    this.chatService.getChatIfExists(this.myUserId, receiverUser).subscribe((data: Chat) => {
+
+      this.currentChat = data; // Guarda el chat en una variable para no cargarlo en cada click
+
+      this.getChatById(this.currentChat.id); // Obtiene los mensajes con el usuario
+
+      this.scrollToBottom(); // Baja el scrollbar del chat hasta el último mensaje
+    }
+    )
   }
 
   getChatById(chatId: number) {
     const idLocal = this.appComponent.getUserIdFromLocalStorage();
-    if(idLocal == -1) return alert("Inicia sesión nuevamente")
+    if (idLocal == -1) return alert("Inicia sesión nuevamente")
 
-    this.chatService.getChatById(this.chatId).subscribe(messages => {
+    this.chatService.getChatById(chatId).subscribe(messages => {
       this.chatList = this.formatMessages(messages);
       console.log(this.chatList);
 
     });
   }
+
+
+  sendMessage() {
+    if (this.myUserId == -1) return alert("Inicia sesión nuevamente");
+
+    this.message.senderUserId = this.myUserId;
+    this.message.chatId = this.currentChat.id;
+
+    console.log("Mensaje a enviar:");
+    
+    console.log(JSON.stringify(this.message));
+    
+
+    this.chatService.sendMessage(this.currentChat.id, this.message).subscribe(
+      data => {
+        console.log(data);
+        this.message = new MessageModel();
+        this.getChatById(this.currentChat.id);
+      },
+      err => console.error(err)
+    )
+  }
+
+  // =====================================
+
   private formatMessages(messages: MessageModel[]): MessageModel[] {
     return messages.map(message => {
       const fecha = new Date(message.datetime);
@@ -62,28 +121,12 @@ export class ChatComponent implements OnInit {
   }
 
 
-  sendMessage() {
-    const idLocal = this.appComponent.getUserIdFromLocalStorage();
-
-    if (idLocal == -1) {
-      return alert("Inicia sesión nuevamente")
-    }
-
-    this.message.senderUserId = idLocal;
-
-    this.chatService.sendMessage(this.chatId, this.message).subscribe(
-      data => {
-        console.log(data);
-        this.getChatById(this.chatId);
-      },
-      err => console.error(err)
-    )
-  }
-
 
   // =====================================
+  // Modificar HTML
 
   // Bajar el scrollbar del chat
+  // Este metodo es el que me da error al apretar los chats
   @ViewChild('chatBody') private chatBody: ElementRef;
   scrollToBottom(): void {
     this.chatBody.nativeElement.scrollTop = this.chatBody.nativeElement.scrollHeight;
@@ -91,7 +134,7 @@ export class ChatComponent implements OnInit {
 
   closeChat() {
     let boton = document.getElementById("dropdown");
-    boton?.click()
+    boton?.click();
   }
 
   // =====================================

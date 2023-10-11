@@ -18,14 +18,15 @@
 
             <ul class="bullet-list list-unstyled">
 
-              <button class="friends-button">
+              <button (click)="verifyIfCurrentChatIsLoaded(u.id)"  *ngFor="let u of usersList" class="friends-button">
                 <li class="green">
-                  <h3>Nombre apellido</h3>
+                  <h3>{{u.name}}</h3>
                   <span class="text-gray size-12">Conectado </span>
                 </li>
               </button>
-              
-              <button class="friends-button">
+           
+              <!-- Botones de otros colores -->
+              <!-- <button class="friends-button">
                 <li class="orange">
                   <h3>Nombre apellido</h3>
                   <span class="text-gray size-12">Ausente </span>
@@ -37,7 +38,7 @@
                   <h3>Nombre apellido</h3>
                   <span class="text-gray size-12">Desconectado </span>
                 </li>
-              </button>
+              </button> -->
 
             </ul>
 
@@ -116,9 +117,9 @@
 
       <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
         <div class="input-group mb-0">
-          <input type="text" class="form-control" placeholder="Type message" aria-label="Recipient's username"
+          <input [(ngModel)]="message.content" type="text" class="form-control" placeholder="Type message" aria-label="Recipient's username"
             aria-describedby="button-addon2" />
-          <button class="btn btn-secondary" type="button" id="button-addon2" style="padding-top: .55rem;">
+          <button (click)="sendMessage()" class="btn btn-secondary" type="button" id="button-addon2" style="padding-top: .55rem;">
             Button
           </button>
         </div>
