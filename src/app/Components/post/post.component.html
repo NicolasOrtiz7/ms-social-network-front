@@ -37,21 +37,25 @@
                             <input type="email" class="form-control" placeholder="Write a comment...">
                         </div>
                     </div>
-                    
-                    <div class="panel panel-default agrandar fondo"  style="border: 1px solid red;">
+                    <!-- Con foto -->
+                    <div *ngFor="let post of postList" class="panel panel-default agrandar fondo"  style="border: 1px solid red;">
                         <div class="panel-heading">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-rounded">
+                            <img [src]="post.userOwner.profilePicture" class="img-rounded">
                             <div class="pull-right text-right">
                                 <div class="panel-body">
-                                    <blockquote>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</blockquote>
+                                    <!-- <blockquote>{{post.description}}
+                                    </blockquote> -->
                                 </div>
                             </div>
-                            <div><strong>John Doe</strong></div>
-                            <div class="small"><i class="fa fa-map-marker"></i> Medellin, Colombia. <strong> hace 3 horas </strong></div>
+                            <div><strong>{{post.userOwner.name}}</strong></div>
+                            <div class="small"><i class="fa fa-map-marker"></i> Medellin, Colombia(estatico, editar). <strong> {{post.createdAt}} </strong></div>
                             
                         </div>
+                        <blockquote>{{post.description}}
+                        </blockquote>
                         <div class="panel-body">
-                            <img src="https://www.bootdey.com/image/670x500" class="img-responsive">
+                            <!-- <img src="https://www.bootdey.com/image/670x500" class="img-responsive"> -->
+                            <img [src]="post.image" class="post-img">
 
                             <!-- DIV LIKES Y COMENTARIOS -->
                             <div class="actions">
@@ -59,42 +63,23 @@
                                     <button type="button" class="btn btn-link"><i class="fa fa-thumbs-o-up"></i> Me gusta</button>
                                     <button type="button" class="btn btn-link"><i class="fa fa-share"></i> Compartir</button>
                                 </div>
-                                <div class="pull-right"><strong>A 1.789</strong> les gusta</div>      
+                                <div class="pull-right"><strong>A 
+                                    {{post.likes? post.likes.length: 0}}
+                                </strong> les gusta</div>      
                             </div>  
                             <!-- --------------------- -->
                             
-                            <div class="media">
+                            <div *ngFor="let com of post.comments" class="media">
                                 <a class="pull-left" href="#">
-                                    <img class="media-object img-rounded" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                                    <img class="media-object img-rounded" [src]="com.userOwner.profilePicture">
                                 </a>
                                 <div class="media-body">
-                                    <div class="pull-right small">3 hours ago</div>
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                                    <div class="pull-right small">{{com.createdAt}}</div>
+                                    <strong class="media-heading">{{com.userOwner.name}}</strong>
+                                    <p>{{com.comment}}</p>
                                 </div>
                             </div>
                             
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img class="media-object img-rounded" src="https://bootdey.com/img/Content/avatar/avatar1.png">
-                                </a>
-                                <div class="media-body">
-                                    <div class="pull-right small">3 hours ago</div>
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img class="media-object img-rounded" src="https://bootdey.com/img/Content/avatar/avatar1.png">
-                                </a>
-                                <div class="media-body">
-                                    <div class="pull-right small">3 hours ago</div>
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                                </div>
-                            </div>
                             
                         </div>
                         <div class="panel-footer">
