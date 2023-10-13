@@ -29,10 +29,10 @@
             <div class="card">
 
                 <div class="card-content pt20 pb20 profile-header">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="img-fluid rounded-circle">
-                    <h4 class="card-title text-center mb20">Adam Voges</h4>
+                    <img [src]="user.profilePicture" alt="" class="img-fluid rounded-circle">
+                    <h4 class="card-title text-center mb20">{{user.name}}</h4>
                     <p>
-                        Hello, I am Adam Voges from London, I am a professional designer at design_mylife. I hope you enjoy the Assan Templates and how its updated every month
+                        {{user.description}}
 
                     </p>
                     <div class="text-center clearfix">
@@ -52,19 +52,19 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-4 mb20">
-                            <h5>947</h5>
-                            <h6 class="text-small text-muted">Followers</h6>
+                            <h5>999999</h5>
+                            <h6 class="text-small text-muted">Publicaciones</h6>
                         </div>
                         <div class="col-md-4 mb20">
-                            <h5>583</h5>
-                            <h6 class="text-small text-muted">Tweets</h6>
+                            <h5>{{user.followers?.length}}</h5>
+                            <h6 class="text-small text-muted">Seguidores</h6>
                         </div>
                         <div class="col-md-4 mb20">
-                            <h5>48</h5>
-                            <h6 class="text-small text-muted">Posts</h6>
+                            <h5>999999</h5>
+                            <h6 class="text-small text-muted">Seguidos</h6>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-primary btn-rounded">Follow</a>
+                    <a href="#" class="btn btn-primary btn-rounded">Ver Perfil</a>
                     <hr>
                     <div class="skill-bar mb20 clearfix">
 

@@ -14,4 +14,6 @@ export class User {
 
     coverPicture: string;
 
+    followers: Array<User>;
+
 }
