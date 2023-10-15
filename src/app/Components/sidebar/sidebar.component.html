@@ -26,13 +26,14 @@
     <div class="row">
         <!-- <div class="col-md-4 mb30"> -->
         <div class="">
-            <div class="card">
+            <div *ngFor="let u of recommendedUsers"  class="card">
 
                 <div class="card-content pt20 pb20 profile-header">
-                    <img [src]="user.profilePicture" alt="" class="img-fluid rounded-circle">
-                    <h4 class="card-title text-center mb20">{{user.name}}</h4>
+
+                    <img [src]="u.profilePicture" alt="" class="img-fluid rounded-circle">
+                    <h4 class="card-title text-center mb20">{{u.name}}</h4>
                     <p>
-                        {{user.description}}
+                        {{u.description}}
 
                     </p>
                     <div class="text-center clearfix">
@@ -56,7 +57,7 @@
                             <h6 class="text-small text-muted">Publicaciones</h6>
                         </div>
                         <div class="col-md-4 mb20">
-                            <h5>{{user.followers? user.followers.length : 0}}</h5>
+                            <h5>{{u.followers? u.followers.length : 0}}</h5>
                             <h6 class="text-small text-muted">Seguidores</h6>
                         </div>
                         <div class="col-md-4 mb20">
@@ -64,40 +65,8 @@
                             <h6 class="text-small text-muted">Seguidos</h6>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-primary btn-rounded">Ver Perfil</a>
+                    <a href="#" class="btn btn-primary btn-rounded">Seguir</a>
                     <hr>
-                    <div class="skill-bar mb20 clearfix">
-
-                        <span>HTML5 / CSS3</span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <!--skill bar-->
-                    <div class="skill-bar mb20 clearfix">
-
-                        <span>Javascript</span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 89%"></div>
-                        </div>
-                    </div>
-                    <!--skill bar-->
-                    <div class="skill-bar mb20 clearfix">
-
-                        <span>Bootstrap</span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <!--skill bar-->
-                    <div class="skill-bar clearfix">
-
-                        <span>Coffee</span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                        </div>
-                    </div>
-                    <!--skill bar-->
                 </div>
                 <!--content-->
 

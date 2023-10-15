@@ -4,6 +4,8 @@ import { Post } from 'src/app/Models/post';
 import { User } from 'src/app/Models/user';
 import { PostService } from 'src/app/Services/post.service';
 import { DatePipe } from '@angular/common';
+import { Comment } from 'src/app/Models/comment';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-post',
@@ -13,8 +15,9 @@ import { DatePipe } from '@angular/common';
 export class PostComponent implements OnInit {
 
   postList: Post[] = [];
+  comment: string;
 
-  constructor(private postService: PostService, private datePipe: DatePipe) { }
+  constructor(private postService: PostService, private datePipe: DatePipe, private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.getAllPosts();
@@ -33,6 +36,7 @@ export class PostComponent implements OnInit {
           let commentList = await this.postService.getCommentsByPostId(post.id).toPromise();
           post.comments = commentList ?? [];
         }
+        console.log(this.postList)
       }
     )
   }
@@ -47,5 +51,40 @@ export class PostComponent implements OnInit {
 
   // -----------------------------------------
 
+  sendComment(postId: number){
+
+    if(this.comment.length > 0){
+      console.log("entra");
+      
+
+      const newComment = new Comment();
+      const post = new Post();
+
+      post.id = postId;
+
+      newComment.comment = this.comment;
+
+      const myUserId = this.appComponent.getUserIdFromLocalStorage();
+      newComment.userId = myUserId;
+
+      console.log("Comentario a enviar");
+      console.log(newComment);
+      
+      
+
+
+      this.postService.sendComment(postId, newComment).subscribe(
+        data => {
+          console.log("Comentario enviado");
+          this.comment = "";
+          this.getAllPosts();
+          
+        },
+        err => console.log(err)
+      )
+    }
+
+
+  }
 
 }

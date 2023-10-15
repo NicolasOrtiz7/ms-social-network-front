@@ -26,4 +26,8 @@ export class PostService {
     return this.http.get<Comment[]>(this.URL + "/post/" + postId + "/comments");
   }
 
+  sendComment(postId: number, comment: Comment){
+    return this.http.post(this.URL + "/post/" + postId + "/comment", comment);
+  }
+
 }

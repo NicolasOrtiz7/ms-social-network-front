@@ -14,6 +14,8 @@ export class SidebarComponent implements OnInit{
 
   user: User = new User();
 
+  recommendedUsers: User[] = [];
+
   constructor(
     private userService: UserService,
     private appComponent: AppComponent
@@ -22,6 +24,7 @@ export class SidebarComponent implements OnInit{
 
   ngOnInit(): void {
     this.getMyUser();
+    this.getAllUsers();
   }
 
   getMyUser(){
@@ -31,6 +34,14 @@ export class SidebarComponent implements OnInit{
         console.log(data);
         console.log("NO DEBERIA DEVOLVER LA CONTRASEÑA, CAMBIAR A DTO");  
       })
+  }
+
+  getAllUsers(){ // Cambiar por "Usuarios que No son Amigos"
+    this.userService.getAllUsers().subscribe(data => {
+      this.recommendedUsers = data;
+      console.log(this.recommendedUsers);
+    }
+    )
   }
 
 }
