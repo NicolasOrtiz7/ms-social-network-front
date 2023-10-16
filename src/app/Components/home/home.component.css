@@ -3,6 +3,34 @@
     overflow: hidden;
 }
 
+
+
 .ancho{
     max-width: 100%;
+}
+
+
+@media (max-width: 1320px){
+
+
+    .ancho{
+        position: absolute;
+        top: 1000px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 810px){
+
+    .ocultar-celulares{
+        height: 0;
+        width: 0;
+    }
+
+    .ancho{
+        max-width: 100%;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+    }
 }
