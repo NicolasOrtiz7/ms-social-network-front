@@ -14,6 +14,7 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class PostComponent implements OnInit {
 
+  post: Post = new Post();
   postList: Post[] = [];
   comment: string;
 
@@ -41,49 +42,73 @@ export class PostComponent implements OnInit {
     )
   }
 
+  getPostById(postId: number) {
+    this.postService.getPostById(postId).subscribe(async data => {
+      this.post = data;
+
+      // Obtener likes y comentarios actualizados
+      let postLikes = await this.postService.getLikesByPostId(postId).toPromise();
+      this.post.likes = postLikes ?? [];
+      let postComments = await this.postService.getCommentsByPostId(postId).toPromise();
+      this.post.comments = postComments ?? [];
+
+      // Actualizar el post dentro de postList[]
+      const index = this.postList.findIndex(item => item.id == this.post.id);
+      if (index !== -1) this.postList[index] = this.post;
+
+    })
+  }
+
   getLikesByPostId(postId: number) {
-    this.postService.getLikesByPostId(postId).subscribe(data => {})
+    this.postService.getLikesByPostId(postId).subscribe(data => { })
   }
   getCommentsByPostId(postId: number) {
-    this.postService.getCommentsByPostId(postId).subscribe(data => {})
+    this.postService.getCommentsByPostId(postId).subscribe(data => { })
   }
 
 
   // -----------------------------------------
 
-  sendComment(postId: number){
+  sendComment(postId: number) {
 
-    if(this.comment.length > 0){
-      console.log("entra");
-      
-
-      const newComment = new Comment();
+    if (this.comment.length > 0) {
       const post = new Post();
+      const newComment = new Comment();
+      const myUserId = this.appComponent.getUserIdFromLocalStorage();
 
       post.id = postId;
-
       newComment.comment = this.comment;
-
-      const myUserId = this.appComponent.getUserIdFromLocalStorage();
       newComment.userId = myUserId;
-
-      console.log("Comentario a enviar");
-      console.log(newComment);
-      
-      
-
 
       this.postService.sendComment(postId, newComment).subscribe(
         data => {
-          console.log("Comentario enviado");
           this.comment = "";
-          this.getAllPosts();
-          
+          this.getPostById(postId);
         },
         err => console.log(err)
       )
     }
+  }
 
+  sendLike(postId: number){
+    const post = new Post();
+    const newLike = new Like();
+    const myUserId = this.appComponent.getUserIdFromLocalStorage();
+
+    post.id = postId;
+    newLike.post = post;
+    newLike.userId = myUserId;
+
+    console.log("LIKE A ENVIAR");
+    console.log(newLike);
+    
+    
+
+    this.postService.sendLikes(postId, newLike).subscribe(
+      data => {
+        this.getPostById(postId);
+      }
+    )
 
   }
 
