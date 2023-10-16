@@ -16,6 +16,8 @@ export class PostComponent implements OnInit {
 
   post: Post = new Post();
   postList: Post[] = [];
+
+  newPostContent: string;
   comment: string;
 
   constructor(private postService: PostService, private datePipe: DatePipe, private appComponent: AppComponent) { }
@@ -69,6 +71,25 @@ export class PostComponent implements OnInit {
 
   // -----------------------------------------
 
+  sendPost(){
+
+    if(this.newPostContent.length > 0){
+
+      const myUserId = this.appComponent.getUserIdFromLocalStorage();
+      const newPost = new Post(); 
+      
+      newPost.userId = myUserId;
+      newPost.description = this.newPostContent;
+  
+      this.postService.sendPost(newPost).subscribe(
+        data => {
+          this.newPostContent = "";
+          this.getAllPosts();
+        }
+      )
+    }
+  }
+
   sendComment(postId: number) {
 
     if (this.comment.length > 0) {
@@ -98,11 +119,6 @@ export class PostComponent implements OnInit {
     post.id = postId;
     newLike.post = post;
     newLike.userId = myUserId;
-
-    console.log("LIKE A ENVIAR");
-    console.log(newLike);
-    
-    
 
     this.postService.sendLikes(postId, newLike).subscribe(
       data => {

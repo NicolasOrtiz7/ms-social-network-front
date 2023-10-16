@@ -3,8 +3,9 @@
             <div class="row activity">
                 <div class="col-md-6">
                     <div class="panel panel-default agrandar fondo">
+                        <br>
                         <div class="panel-body">
-                            <input type="email" class="form-control" placeholder="What are you doing now?">
+                            <input [(ngModel)]="newPostContent" type="text" class="form-control" placeholder="Qué estás haciendo ahora?">
                         </div>
                         <div class="panel-footer">
                             <div class="btn-group">
@@ -14,14 +15,14 @@
                                 <button type="button" class="btn btn-link"><i class="fa fa-video-camera"></i></button>
                                 <button type="button" class="btn btn-link"><i class="fa fa-calendar-o"></i></button>
                             </div>
-                            
                             <div class="pull-right">
-                                <button type="button" class="btn btn-success">submit</button>
+                                <button (click)="sendPost()" type="button" class="btn btn-success">Publicar</button>
                             </div>  
                         </div>
                     </div>
                     
                     <!-- Con foto -->
+                    <br>
                     <div *ngFor="let post of postList" class="panel panel-default agrandar fondo"  style="border: 1px solid red;">
                         <div class="panel-heading">
                             <img [src]="post.userOwner.profilePicture" class="img-rounded">
