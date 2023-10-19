@@ -1,85 +1,128 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-        <div class="container">
-            <div class="row activity">
-                <div class="col-md-6">
-                    <div class="panel panel-default agrandar fondo">
-                        <br>
-                        <div class="panel-body">
-                            <input [(ngModel)]="newPostContent" type="text" class="form-control" placeholder="Qué estás haciendo ahora?">
-                        </div>
-                        <div class="panel-footer">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-link"><i class="fa fa-map-marker"></i></button>
-                                <button type="button" class="btn btn-link"><i class="fa fa-users"></i></button>
-                                <button type="button" class="btn btn-link"><i class="fa fa-camera"></i></button>
-                                <button type="button" class="btn btn-link"><i class="fa fa-video-camera"></i></button>
-                                <button type="button" class="btn btn-link"><i class="fa fa-calendar-o"></i></button>
-                            </div>
-                            <div class="pull-right">
-                                <button (click)="sendPost()" type="button" class="btn btn-success">Publicar</button>
-                            </div>  
-                        </div>
+<div class="container">
+    <div class="row activity">
+        <div class="col-md-6">
+            <div class="panel panel-default agrandar fondo">
+                <br>
+                <div class="panel-body">
+                    <input [(ngModel)]="newPostContent" type="text" class="form-control"
+                        placeholder="Qué estás haciendo ahora?">
+                </div>
+                <div class="panel-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-link"><i class="fa fa-map-marker"></i></button>
+                        <button type="button" class="btn btn-link"><i class="fa fa-users"></i></button>
+                        <button type="button" class="btn btn-link"><i class="fa fa-camera"></i></button>
+                        <button type="button" class="btn btn-link"><i class="fa fa-video-camera"></i></button>
+                        <button type="button" class="btn btn-link"><i class="fa fa-calendar-o"></i></button>
                     </div>
-                    
-                    <!-- Con foto -->
-                    <br>
-                    <div *ngFor="let post of postList" class="panel panel-default agrandar fondo"  style="border: 1px solid red;">
-                        <div class="panel-heading">
-                            <img [src]="post.userOwner.profilePicture" class="img-rounded">
-                            <div class="pull-right text-right">
-                                <div class="panel-body">
-                                    <!-- <blockquote>{{post.description}}
-                                    </blockquote> -->
-                                </div>
-                            </div>
-                            <div><strong>{{post.userOwner.name}}</strong></div>
-                            <div class="small"><i class="fa fa-map-marker"></i> Medellin, Colombia(estatico, editar). <strong> {{post.createdAt}} </strong></div>
-                            
-                        </div>
-                        <blockquote>{{post.description}}
-                        </blockquote>
-                        <div class="panel-body">
-                            <!-- <img src="https://www.bootdey.com/image/670x500" class="img-responsive"> -->
-                            <img *ngIf="post.image" [src]="post.image" class="post-img">
-
-                            <!-- DIV LIKES Y COMENTARIOS -->
-                            <div class="actions">
-                                <div class="btn-group">
-                                    <button (click)="sendLike(post.id)" type="button" class="btn btn-link"><i class="fa fa-thumbs-o-up"></i> Me gusta</button>
-                                    <button type="button" class="btn btn-link"><i class="fa fa-share"></i> Compartir</button>
-                                </div>
-                                <div class="pull-right"><strong>A 
-                                    {{post.likes? post.likes.length: 0}}
-                                </strong> les gusta</div>      
-                            </div>  
-                            <!-- --------------------- -->
-                            
-                            <div *ngFor="let com of post.comments" class="media">
-                                <a class="pull-left" href="#">
-                                    <img class="media-object img-rounded" [src]="com.userOwner.profilePicture">
-                                </a>
-                                <div class="media-body">
-                                    <div class="pull-right small">{{com.createdAt}}</div>
-                                    <strong class="media-heading">{{com.userOwner.name}}</strong>
-                                    <p>{{com.comment}}</p>
-                                </div>
-                            </div>
-                            
-                            
-                        </div>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <input [(ngModel)]="comment" type="text" class="form-control" placeholder="Escribe un comentario...">
-                                </div>
-                                <div class="col-md-2">
-                                    <button (click)="sendComment(post.id)" class="btn btn-primary">Enviar</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="pull-right">
+                        <button (click)="sendPost()" type="button" class="btn btn-success">Publicar</button>
                     </div>
-                    
-                
                 </div>
             </div>
+
+            <!-- Con foto -->
+            <br>
+            <div *ngFor="let post of postList" class="panel panel-default agrandar fondo"
+                style="border: 1px solid red;">
+                <div class="panel-heading">
+                    <img [src]="post.userOwner.profilePicture" class="img-rounded">
+                    <div class="pull-right text-right">
+                        <div class="panel-body">
+                            <!-- <blockquote>{{post.description}}
+                                    </blockquote> -->
+                        </div>
+                    </div>
+                    <div><strong>{{post.userOwner.name}}</strong></div>
+                    <div class="small"><i class="fa fa-map-marker"></i> Medellin, Colombia(estatico, editar). <strong>
+                            {{post.createdAt}} </strong></div>
+
+                </div>
+                <blockquote>{{post.description}}
+                </blockquote>
+                <div class="panel-body">
+                    <!-- <img src="https://www.bootdey.com/image/670x500" class="img-responsive"> -->
+                    <img *ngIf="post.image" [src]="post.image" class="post-img">
+
+                    <!-- DIV LIKES Y COMENTARIOS -->
+                    <div class="actions">
+                        <div class="btn-group">
+                            <button (click)="sendLike(post.id)" type="button" class="btn btn-link"><i
+                                    class="fa fa-thumbs-o-up"></i> Me gusta</button>
+                            <button type="button" class="btn btn-link"><i class="fa fa-share"></i> Compartir</button>
+                        </div>
+                        <div class="pull-right">
+                            <button (click)="getLikesByPostId(post.id)" class="button-transparent" type="button"
+                                data-bs-toggle="modal" data-bs-target="#likesModal">
+                                <strong>A
+                                    {{post.likes? post.likes.length: 0}}
+                                </strong> les gusta
+                            </button>
+                        </div>
+                    </div>
+                    <!-- --------------------- -->
+
+                    <div *ngFor="let com of post.comments" class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object img-rounded" [src]="com.userOwner.profilePicture">
+                        </a>
+                        <div class="media-body">
+                            <div class="pull-right small">{{com.createdAt}}</div>
+                            <strong class="media-heading">{{com.userOwner.name}}</strong>
+                            <p>{{com.comment}}</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input [(ngModel)]="comment" type="text" class="form-control"
+                                placeholder="Escribe un comentario...">
+                        </div>
+                        <div class="col-md-2">
+                            <button (click)="sendComment(post.id)" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
+    </div>
+</div>
+
+
+<!-- MODALES -->
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="likesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Les gusta a</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngFor="let like of post.likes">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <img class="img-small media-object img-rounded" [src]="like.userOwner.profilePicture">
+                        <strong class="media-heading">{{like.userOwner.name}}</strong>
+                      </div>
+                      <button class="btn btn-primary ml-auto">Seguir</button>
+                    </div>
+                    <br>
+                  </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

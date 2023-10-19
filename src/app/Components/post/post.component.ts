@@ -39,6 +39,8 @@ export class PostComponent implements OnInit {
           let commentList = await this.postService.getCommentsByPostId(post.id).toPromise();
           post.comments = commentList ?? [];
         }
+        console.log("HOALA");
+        
         console.log(this.postList)
       }
     )
@@ -62,7 +64,7 @@ export class PostComponent implements OnInit {
   }
 
   getLikesByPostId(postId: number) {
-    this.postService.getLikesByPostId(postId).subscribe(data => { })
+    this.postService.getLikesByPostId(postId).subscribe(data => { this.post.likes = data })
   }
   getCommentsByPostId(postId: number) {
     this.postService.getCommentsByPostId(postId).subscribe(data => { })
