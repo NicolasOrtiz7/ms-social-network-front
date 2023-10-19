@@ -24,6 +24,8 @@ export class ChatComponent implements OnInit {
   myUserId: number;                   // esto lo cambiamos cuando se implementa la seguridad
   currentChat: Chat = new Chat(-1);
 
+  currentChatName: string = "Chat";          // Para mostrar el nombre del usuario con el que estoy chateando
+
   message: MessageModel = new MessageModel();
 
   constructor(
@@ -69,6 +71,8 @@ export class ChatComponent implements OnInit {
     this.chatService.getChatIfExists(this.myUserId, receiverUser).subscribe((data: Chat) => {
 
       this.currentChat = data; // Guarda el chat en una variable para no cargarlo en cada click
+
+      this.currentChatName = this.currentChat.receiverUser.name; // Solo sirve para mostrar el nombre del usuario con el que estoy chateando en el botón del dropdown, porque de la otra forma ocasionaba un bug
 
       this.getChatById(this.currentChat.id); // Obtiene los mensajes con el usuario
 

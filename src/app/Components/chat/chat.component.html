@@ -53,7 +53,8 @@
 <!-- Botón para abrir el chat -->
 <div class="dropup-center dropup chat-button" >
   <button id="dropdown" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
-    Nombre Apellido
+    <!-- {{currentChat.senderUserId == myUserId? currentChat.receiverUser.name: currentChat.senderUser.name}} DE ESTA FORMA SE DESAPARECEN LOS NOMBRES DE LOS USUARIOS CONECTADOS. NO BUSQUÉ EL ERROR-->
+    {{currentChatName}}
   </button>
   <div class="dropdown-menu " style="width: 300px;">
 

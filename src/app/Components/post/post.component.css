@@ -22,7 +22,8 @@
 }
 
 .button-transparent{
-    background-color: #d8e9ff;
+    background-color: transparent;
+    color: royalblue;
     border: 0;
     border-radius: 10px;
 }
@@ -94,7 +95,6 @@ body{margin-top:20px;
     
     .activity .panel .panel-body .actions {
         background: #f8f9fa;
-        margin: 15px -15px 0 -15px;
         padding: 0 20px 0 10px;
         line-height: 50px;
         font-size: 12px

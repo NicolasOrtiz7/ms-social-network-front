@@ -25,10 +25,9 @@
             <!-- Con foto -->
             <br>
             <div *ngFor="let post of postList" class="panel panel-default agrandar fondo"
-                style="border: 1px solid red;">
+                style="border: 1px solid red; margin-bottom: 30px;">
                 <div class="panel-heading">
-                    <img  [src]="post.userOwner.profilePicture" class="img-cover img-rounded"
-                    style="margin-left: 15px;">
+                    <img [src]="post.userOwner.profilePicture" class="img-cover img-rounded" style="margin-left: 15px;">
                     <div class="pull-right text-right">
                         <div class="panel-body">
                         </div>
@@ -54,9 +53,9 @@
                         <div class="pull-right">
                             <button (click)="getLikesByPostId(post.id)" class="button-transparent" type="button"
                                 data-bs-toggle="modal" data-bs-target="#likesModal">
-                                <strong>A
+                                <strong>
                                     {{post.likes? post.likes.length: 0}}
-                                </strong> les gusta
+                                </strong> Me gusta
                             </button>
                         </div>
                     </div>
@@ -64,8 +63,7 @@
 
                     <div *ngFor="let com of post.comments" class="media">
                         <a class="pull-left" href="#">
-                            <img class="img-cover" [src]="com.userOwner.profilePicture"
-                            style="margin-left: 5px;">
+                            <img class="img-cover" [src]="com.userOwner.profilePicture" style="margin-left: 10px;">
                         </a>
                         <div class="media-body">
                             <div class="pull-right small">{{com.createdAt}}</div>
@@ -79,17 +77,16 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-md-10">
-                            <input [(ngModel)]="comment" type="text" class="form-control"
+                            <input style="margin-left: 10px;" [(ngModel)]="comment" type="text" class="form-control"
                                 placeholder="Escribe un comentario...">
                         </div>
                         <div class="col-md-2">
                             <button (click)="sendComment(post.id)" class="btn btn-primary">Enviar</button>
                         </div>
+                        <br><br>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -110,14 +107,14 @@
             <div class="modal-body">
                 <div *ngFor="let like of post.likes">
                     <div class="d-flex justify-content-between">
-                      <div>
-                        <img class="img-small img-cover" [src]="like.userOwner.profilePicture">
-                        <strong class="media-heading">{{like.userOwner.username}}</strong>
-                      </div>
-                      <button class="btn btn-primary ml-auto">Seguir</button>
+                        <div>
+                            <img class="img-small img-cover" [src]="like.userOwner.profilePicture">
+                            <strong class="media-heading">{{like.userOwner.username}}</strong>
+                        </div>
+                        <button class="btn btn-primary ml-auto">Seguir</button>
                     </div>
                     <br>
-                  </div>
+                </div>
 
             </div>
             <div class="modal-footer">
