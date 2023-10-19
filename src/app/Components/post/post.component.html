@@ -27,11 +27,10 @@
             <div *ngFor="let post of postList" class="panel panel-default agrandar fondo"
                 style="border: 1px solid red;">
                 <div class="panel-heading">
-                    <img [src]="post.userOwner.profilePicture" class="img-rounded">
+                    <img  [src]="post.userOwner.profilePicture" class="img-cover img-rounded"
+                    style="margin-left: 15px;">
                     <div class="pull-right text-right">
                         <div class="panel-body">
-                            <!-- <blockquote>{{post.description}}
-                                    </blockquote> -->
                         </div>
                     </div>
                     <div><strong>{{post.userOwner.name}}</strong></div>
@@ -39,11 +38,11 @@
                             {{post.createdAt}} </strong></div>
 
                 </div>
-                <blockquote>{{post.description}}
+                <blockquote style="margin-left: 15px;">{{post.description}}
                 </blockquote>
                 <div class="panel-body">
                     <!-- <img src="https://www.bootdey.com/image/670x500" class="img-responsive"> -->
-                    <img *ngIf="post.image" [src]="post.image" class="post-img">
+                    <img *ngIf="post.image" [src]="post.image" class="img-post">
 
                     <!-- DIV LIKES Y COMENTARIOS -->
                     <div class="actions">
@@ -65,7 +64,8 @@
 
                     <div *ngFor="let com of post.comments" class="media">
                         <a class="pull-left" href="#">
-                            <img class="media-object img-rounded" [src]="com.userOwner.profilePicture">
+                            <img class="img-cover" [src]="com.userOwner.profilePicture"
+                            style="margin-left: 5px;">
                         </a>
                         <div class="media-body">
                             <div class="pull-right small">{{com.createdAt}}</div>
@@ -111,8 +111,8 @@
                 <div *ngFor="let like of post.likes">
                     <div class="d-flex justify-content-between">
                       <div>
-                        <img class="img-small media-object img-rounded" [src]="like.userOwner.profilePicture">
-                        <strong class="media-heading">{{like.userOwner.name}}</strong>
+                        <img class="img-small img-cover" [src]="like.userOwner.profilePicture">
+                        <strong class="media-heading">{{like.userOwner.username}}</strong>
                       </div>
                       <button class="btn btn-primary ml-auto">Seguir</button>
                     </div>

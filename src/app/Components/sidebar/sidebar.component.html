@@ -1,25 +1,4 @@
-<!-- 
-<div class="contenedor">
-<div style="border: 1px solid red;">
-    <div class="imagen">
-        <img class="imagen" src="https://www.fcbarcelona.com/photo-resources/2020/04/30/43337a9f-3781-4886-948c-f70912e4b1af/1920x1080_Messi_primerGol-min.jpg?width=1200&height=750" alt="">
-        <p>Nombre</p>
-        <p>ver perfil</p>
-    </div>
-    <div>
-        <p>Seguidores</p>
-        <p>Seguidos</p>
-    </div>
 
-    <div>
-        div opcional
-    </div>
-
-    <div>
-        <p>Configuracion</p>
-    </div>
-</div>
-</div> -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
 
@@ -30,7 +9,8 @@
 
                 <div class="card-content pt20 pb20 profile-header">
 
-                    <img [src]="u.profilePicture" alt="" class="img-fluid rounded-circle">
+                    <img [src]="u.profilePicture" alt="" class="img-circle img-fluid">
+                    <h4 class="card-title text-center mb20">@{{u.username}}</h4>
                     <h4 class="card-title text-center mb20">{{u.name}}</h4>
                     <p>
                         {{u.description}}
@@ -52,20 +32,14 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-md-4 mb20">
-                            <h5>999999</h5>
-                            <h6 class="text-small text-muted">Publicaciones</h6>
-                        </div>
-                        <div class="col-md-4 mb20">
-                            <h5>{{u.followers? u.followers.length : 0}}</h5>
+                        <div class="col-md-12 mb20 text-center">
+                            <h5>{{u.followers ? u.followers.length : 0}}</h5>
                             <h6 class="text-small text-muted">Seguidores</h6>
                         </div>
-                        <div class="col-md-4 mb20">
-                            <h5>999999</h5>
-                            <h6 class="text-small text-muted">Seguidos</h6>
-                        </div>
                     </div>
-                    <a href="#" class="btn btn-primary btn-rounded">Seguir</a>
+                    <div class="row justify-content-center">
+                        <button style="width: 100px;" class="btn btn-primary btn-rounded">Seguir</button>
+                    </div>
                     <hr>
                 </div>
                 <!--content-->

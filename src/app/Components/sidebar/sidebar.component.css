@@ -12,6 +12,13 @@
     height: 100%;
 } */
 
+.img-circle{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 
 
 
